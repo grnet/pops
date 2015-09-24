@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 
 
 # view should be the name of the url from the rest api
-def map_view(request, view='default', city=None, location=None):
+def map_view(request, view='pops', city=None, location=None):
     if view:
         try:
             if city:
