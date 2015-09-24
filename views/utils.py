@@ -1,14 +1,10 @@
 import json
-import rrdtool
-import time
 
 from django.db.models import Avg, Min, Max
 from django.core.urlresolvers import reverse
-from django.conf import settings
 from django.shortcuts import get_object_or_404
 
-from network.models import City, Location, Ifce
-import gevent
+from network.models import City, Location
 
 
 institutions = {
@@ -66,7 +62,7 @@ def get_all_pops(url, tag=None):
             continue
         children = parent.location_set.filter(geo_lat__gt=0)
         if tag:
-            children = children.filter(peersite__peer_id__peer_tag__icontains=tag)
+            children = children.filter(peersite_set__peer_id__peer_tag__icontains=tag)
         if not children:
             continue
         resp = {}
