@@ -3,8 +3,9 @@ A grnet mon plugin which can visualize the Points of presence
 for grnet.
 
 Runs under:
-[mon.grnet.gr/api/maps](https://mon.grnet.gr/api/maps/) and uses this data to
-show all Points of Presence on a map.
+[mon.grnet.gr/pops/](https://mon.grnet.gr/pops/) and uses data served from
+[mon.grnet.gr/api/pops/](https://mon.grnet.gr/api/pops/) to show all Points of
+Presence on a map.
 
 
 ## Installation
