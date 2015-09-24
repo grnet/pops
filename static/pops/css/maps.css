@@ -1,0 +1,454 @@
+@media screen and (min-width: 400px){
+	#map-canvas {
+		right: 40%;
+	}
+
+	.location-index {
+		width: 40%;
+	}
+}
+
+@media screen and (max-width: 400px){
+	.location-index {
+		display: none;
+	}
+
+	#map-canvas {
+		right: 0%;
+	}
+}
+
+@media screen and (max-width: 600px){
+
+	.location-index .header form .reset {
+		font-size: 20px !important;
+	}
+}
+
+@media screen and (min-width: 850px){
+	#map-canvas {
+		right: 30%;
+	}
+
+	.location-index .locations-details ul.locations li {
+		width: 50%;
+		float: left;
+	}
+
+	.location-index {
+		width: 30%;
+	}
+}
+
+@media screen and (min-width: 1300px){
+	#map-canvas {
+		right: 20%;
+	}
+
+	.location-index {
+		width: 20%;
+	}
+
+}
+
+body.loading .spinner {
+	display: block;
+}
+
+body.loading:after {
+	content: "";
+	display: block;
+	background: #eeeeee;
+	opacity: .5;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 10000;
+}
+
+.spinner {
+  display: none;
+  position: fixed;
+  width: 300px;
+  height: 70px;
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;
+  padding: 0;
+  z-index: 100000;
+  text-align: center;
+}
+
+.loader:before,
+.loader:after,
+.loader {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load7 1.8s infinite ease-in-out;
+  animation: load7 1.8s infinite ease-in-out;
+}
+
+.loader {
+  /*margin: 8em auto;*/
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation-delay: 0.16s;
+  animation-delay: 0.16s;
+}
+.loader:before {
+  left: -3.5em;
+}
+.loader:after {
+  left: 3.5em;
+  -webkit-animation-delay: 0.32s;
+  animation-delay: 0.32s;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+@-webkit-keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #ffffff;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #FFF;
+  }
+}
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #ffffff;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #FFF;
+  }
+}
+
+
+.locations-details .box {
+	position: absolute;
+	top: 0px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 2%;
+	display: none;
+	overflow: auto;
+}
+
+.location-index .locations-details ul.locations li {
+	cursor: pointer;
+}
+
+.locations-details .box h4 {
+	display: inline-block;
+	border-bottom: 1px solid #dddddd;
+	cursor: pointer;
+}
+
+.locations-details .box ul.accordeon li > ul {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height .2s ease-in;
+}
+
+.locations-details .box ul.accordeon li > ul li ul {
+	max-height: none;
+	font-size: 12px;
+}
+
+.locations-details .box ul.accordeon .in-this-location li{
+	list-style: inside;
+}
+
+.locations-details .box ul.accordeon .in-this-location li {
+	font-size: 12px;
+	position: relative;
+}
+
+.locations-details .box ul.accordeon li.open > ul {
+	max-height: 3500px;
+}
+
+.locations-details .box ul.accordeon li h4:after {
+	display: inline-block;
+	content: ' +';
+}
+
+.locations-details .box ul.accordeon li.open h4:after {
+	display: inline-block;
+	content: '-';
+
+}
+
+.location-index .locations-details ul {
+	list-style: none;
+}
+
+.location-index .locations-details ul ul ul li {
+	list-style: inside;
+}
+
+.location-index .locations-details .box .in-this-location ul {
+	width: 80%;
+}
+
+.location-index .locations-details .box .in-this-location ul li {
+	width: 100%;
+}
+
+.locations-details .box.active {
+	background: white;
+	display: block;
+}
+
+.locations-details .box.error {
+	background: #caaaaa;
+}
+
+.locations-details > h3, .locations-details > h5 {
+	text-align: center;
+	padding: 0;
+	line-height: auto;
+	margin: 0;
+}
+
+.coords {
+	font-size: 12px;
+}
+
+#map-canvas {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.location-index .header {
+	padding-top: 5px;
+}
+
+.location-index .header form {
+	margin: 0;
+	float: left;
+	width: 60%;
+}
+
+.location-index .header form input {
+	float: left;
+	width: 35%;
+	height: 30px;
+	margin-right: 2%;
+}
+
+.location-index .header form input.search {
+	width: 45%;
+	margin-left: 2%;
+	box-sizing: border-box;
+}
+
+
+.location-index .header form .reset {
+	cursor: pointer;
+	font-size: 40px;
+	color: silver;
+}
+
+.location-index .header form .reset:hover {
+	color: black;
+}
+
+.location-index .logoimg {
+	width: 20%;
+	margin: 1%;
+	display: inline-block;
+	float: left;
+}
+
+.pops.legend {
+	position: absolute;
+	bottom: -360px;
+	height: 400px;
+	background: white;
+	left: 0;
+	right: 0;
+	transition: all 1s;
+	padding: 3%;
+	box-sizing: border-box;
+	box-shadow: 0 0 10px 10px #eeeeee;
+}
+
+.pops.legend h5 {
+	text-align: center;
+	position: relative;
+}
+
+.pops.legend h5:before {
+	display: block;
+	position: absolute;
+	top: -15px;
+	content: '»';
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 20px;
+	height: 20px;
+	-ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+}
+
+.pops.legend:hover {
+	bottom: 0px;
+}
+
+.pops.legend:hover h5:before {
+	display: block;
+	position: absolute;
+	top: -15px;
+	content: '»';
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 20px;
+	height: 20px;
+	-ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+
+
+.pops.legend img {
+	max-width: 20px;
+	margin-right: 1%;
+}
+
+.pops.legend ul {
+	margin: 0;
+	list-style: none;
+	margin: 0 auto;
+	display: inline-block;
+}
+
+.pops.legend ul.block li {
+	width: 100%;
+}
+
+.pops.legend ul:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+span.subtitle {
+	margin-top: -20px;
+}
+
+.pops.legend ul li {
+	float: left;
+	height: 30px;
+	width: 50%;
+	line-height: 30px;
+}
+
+.pops.legend ul li .green {
+	height: 3px;
+	background: #009999;
+	width: 40px;
+	display: inline-block;
+}
+
+.pops.legend ul li .dashed {
+	border-bottom: 3px dashed black;
+	width: 40px;
+	display: inline-block;
+}
+
+.location-index {
+	position: absolute;
+	right: 0;
+	top: 0px;
+	bottom: 0;
+    transition: all 0.3s ease-out;
+	z-index: 10000;
+	background: whitesmoke;
+	box-shadow: 0 0 10px 1px silver;
+	overflow: hidden;
+}
+
+.locations-details {
+	position: absolute;
+	bottom: 40px;
+	overflow: auto;
+	top: 50px;
+	left: 0;
+	right: 0;
+}
+
+#map-canvas img {
+	max-width: none !important;
+}
+
+#main {
+	margin: 1% 7%;
+
+}
+
+header a.active {
+	color: orange;
+}
+
+
+header .grnetlogo {
+	display: inline-block;
+	height: 100px;
+	position: absolute;
+	top: 10px;
+	left: 40px;
+	width: 230px;
+	height: 50px;
+}
+
+header .grnetlogo img {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-right: 10px;
+}
+
+header .grnetlogo span {
+	position: absolute;
+	top: 5px;
+	right: 0;
+	float: none;
+}
+
+header .title {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	font-size: 22px;
+	margin-top: 27px;
+}
+
+
+.menu {
+	float: right;
+	margin-right: 200px;
+	margin-top: 20px;
+	position: relative;
+}
+

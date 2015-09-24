@@ -1,0 +1,174 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link type="text/css" rel="stylesheet" href="{% static 'pops/css/maps.css' %}">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Greek Research and Technology Network - Network Topology</title>
+	</head>
+	<body>
+		<div class="spinner">
+			<div class="loader"></div>
+		</div>
+		<div id="map-canvas" data-view="{{ view }}" data-media="{{ STATIC_URL }}" data-initial="{% url api:pops %}">
+		</div>
+		<div class="location-index">
+			<div class="header">
+				<img src="{% static 'images/grnet_logo.png' %}" width="77" class="logoimg">
+				<form action="">
+					<span class="reset">x</span>
+					<input class='search' type="search" name='tag' placeholder="insert tag..." value="{{ filter }}">
+					<input type="submit" value="Filter">
+				</form>
+				<a href='{% url pops:default %}'><i class='fa fa-home fa-2x'></i></a>
+			</div>
+			<div class="locations-details ">
+				<h3></h3>
+				<h5></h5>
+				<ul class='locations'>
+					loading ...
+				</ul>
+				<div class="box" data-template-header="
+				<div class='short_description'>
+					<h4><%= pin.display_type %> POP: <%=pin.name %></h4>
+					<% if (pin.inst !== 'CUSTOMER') { %>
+						<div class='institution'><%= pin.institution %></div>
+					<% } %>
+					<span class='address'>
+						<%= pin.address %>
+					</span>
+					<div class='coords'>
+						<%= pin.lat %>, <%= pin.lng %>
+					</div>
+				</div>
+				" data-template="
+				<div class='description'>
+					<ul class='accordeon'>
+						<% if (pin.members_in_this_location.length > 0) {%>
+						<li class='in-this-location'>
+							<h4>In this location</h4>
+							<ul>
+							<% for (var member in pin.members_in_this_location) { %>
+								<li><%= pin.members_in_this_location[member].name %>
+									<% if (pin.members_in_this_location[member].through.length >0) { %>
+										<br><strong>Through this peer</strong>
+										<ul>
+										<% for (var site in pin.members_in_this_location[member].through) {%>
+											<li><%= pin.members_in_this_location[member].through[site].name %></li>
+										<% } %>
+										</ul>
+									<% } %>
+								</li>
+							<% } %>
+							</ul>
+						</li>
+						<% } %>
+						<% if (pin.equipment.length > 0) {%>
+						<li class='devices-and-connections'>
+							<h4>Devices and connections</h4>
+							<ul>
+							<% for (equipment in pin.equipment) {%>
+		                        <li>
+		                        	<a target='_blank' href='http://mon.grnet.gr/rg/node/<%= pin.equipment[equipment].name %>'> <%= pin.equipment[equipment].name %></a>
+									<% if (pin.equipment[equipment].connected_here.length >0) { %>
+									<h5>Peers</h5>
+									<ul>
+										<% for (var site in pin.equipment[equipment].connected_here) {%>
+											<li><%= pin.equipment[equipment].connected_here[site].display_name %></li>
+										<% } %>
+									</ul>
+		                     		<% } %>
+		                     		<% if (pin.equipment[equipment].ifces) { %>
+										<h5>Backbone Connections</h5>
+			                     		<% if (pin.equipment[equipment].ifces.length >0 ) { %>
+										<ul>
+											<% for (var ifce in pin.equipment[equipment].ifces) {%>
+
+												<li><%= pin.equipment[equipment].ifces[ifce].display_name %></li>
+											<% } %>
+										</ul>
+			                     		<% } %>
+			                     	<% } %>
+		                        </li>
+	                     	<% } %>
+							</ul>
+						</li>
+	                     <% } %>
+					</ul>
+				</div>
+				">
+				</div>
+			</div>
+			<div class="legend">
+				<div class="pops legend">
+					<h5>Legend</h5>
+					<h6>Owner of pop</h6>
+					<ul>
+						<li>
+							<img src="{% static 'pops/icons/customer-legend.png' %}" alt="">
+							<span>Customer</span>
+						</li>
+						<li>
+							<img src="{% static 'pops/icons/grnet-legend.png' %}" alt="">
+							<span>Grnet</span>
+						</li>
+						<li>
+							<img src="{% static 'pops/icons/commercial-legend.png' %}" alt="">
+							<span>Commercial</span>
+						</li>
+						<li>
+							<img src="{% static 'pops/icons/pin-legend.png' %}" alt="">
+							<span>City</span>
+						</li>
+					</ul>
+					<h6>Type of pop</h6>
+					<ul>
+						<li>
+							<img src="{% static 'pops/icons/core-legend.png' %}" alt="">
+							<span>Core</span>
+						</li>
+						<li>
+							<img src="{% static 'pops/icons/access-optical-legend.png' %}" alt="">
+							<span>Access Optical</span>
+						</li>
+						<li>
+							<img src="{% static 'pops/icons/access-l2-legend.png' %}" alt="">
+							<span>Access L2</span>
+						</li>
+						<li>
+							<img src="{% static 'pops/icons/distribution-legend.png' %}" alt="">
+							<span>Distribution</span>
+						</li>
+						<li>
+							<img src="{% static 'pops/icons/pass-through-thumb.png' %}" alt="">
+							<span>Pass through</span>
+						</li>
+						<li>
+							<img src="{% static 'pops/icons/unknown-thumb.png' %}" alt="">
+							<span>Unknown</span>
+						</li>
+					</ul>
+					<h6>Lines</h6>
+					<ul class='block'>
+						<li>
+							<div class="green"></div>
+							<span>Direct connection</span>
+						</li>
+						<li>
+							<div class="dashed"></div>
+							<span>Peer through peer</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.js' %}" type="text/javascript"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry" type="text/javascript"></script>
+	<script src="{% static 'pops/js/gmaps.js' %}" type="text/javascript"></script>
+	<script src="{% static 'pops/js/underscore-min.js' %}" type="text/javascript"></script>
+	</body>
+</html>
