@@ -299,7 +299,7 @@ def get_pops_by_city(city, url, tag=None):
         'city', 'node_set', 'peersite_set', 'peerifces_set'
     )
     if tag:
-        parents = parents.filter(peersite__peer_id__peer_tag__icontains=tag)
+        parents = parents.filter(peersite_set__peer_id__peer_tag__icontains=tag)
     coords = parents.aggregate(
         maxlat=Max('geo_lat'),
         maxlng=Max('geo_lng'),
