@@ -4,6 +4,7 @@ from pops.views import api
 
 urlpatterns = patterns(
     '',
+    url(r'^locations/$', api.location, name='location'),
     url(r'^locations/(?P<location>[\w|\W]+)/$', api.location, name='location'),
     url(r'^(?P<city>[\w|\W]+)/$', api.pops, name='pops'),
     url(r'^$', api.pops, name='pops'),

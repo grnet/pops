@@ -2,7 +2,7 @@
 import json
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
-from network.models import PeerIfces, PeerSite
+from network.models import PeerIfces, PeerSite, Location
 from utils import (
     get_all_pops,
     get_pops_by_city,
@@ -208,9 +208,21 @@ def pops(request, city=None):
     )
 
 
-def location(request, location):
-    return HttpResponse(
-        json.dumps(location_details(location)),
-        mimetype='application/json',
-        content_type='application/json; charset=utf-8'
-    )
+def location(request, location=None):
+    if location:
+        return HttpResponse(
+            json.dumps(location_details(location)),
+            mimetype='application/json',
+            content_type='application/json; charset=utf-8'
+        )
+    else:
+        result = []
+        for l in Location.objects.all():
+            result.append({'id': l.location_id, 'name': l.name})
+        return HttpResponse(
+            json.dumps(result),
+            mimetype='application/json',
+            content_type='application/json; charset=utf-8'
+        )
+
+
