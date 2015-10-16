@@ -218,7 +218,11 @@ def location(request, location=None):
     else:
         result = []
         for l in Location.objects.all():
-            result.append({'id': l.location_id, 'name': l.name})
+            result.append({
+                'id': l.location_id,
+                'name': l.name,
+                'address': l.address,
+            })
         return HttpResponse(
             json.dumps(result),
             mimetype='application/json',
