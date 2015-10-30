@@ -68,6 +68,21 @@ def site_devices(request, site_id):
                 "id": 999999
             }]
         }])
+        response.extend([{
+            'id': 999999,
+            'free_ports': [],
+            'role': 'CPE',
+            'name': 'lab-mx1.grnet.gr',
+            'ifces': [{
+                'description': 'test',
+                'ifce': 'ge-1/0/0',
+                "bandwidth": 1000000000,
+                "vlans": [
+                ],
+                "type": "Unknown",
+                "id": 9999999
+            }]
+        }])
     elif site_id == '902':
         response.extend([{
             'id': 999999,
@@ -82,6 +97,21 @@ def site_devices(request, site_id):
                 ],
                 "type": "Unknown",
                 "id": 9999909
+            }]
+        }])
+        response.extend([{
+            'id': 99999999,
+            'free_ports': [],
+            'role': 'CPE',
+            'name': 'lab-mx2.grnet.gr',
+            'ifces': [{
+                'description': 'test',
+                'ifce': 'ge-1/0/6',
+                "bandwidth": 1000000000,
+                "vlans": [
+                ],
+                "type": "Unknown",
+                "id": 999999999
             }]
         }])
     json_str = json.dumps(response)
