@@ -19,7 +19,7 @@ def peer_ifces(request, peer_id):
     for ifce in ifces:
         response.append(ifce.to_dict())
 
-    ifces = Ifce.objects.filter(description__contains=peer.peer_tag).filter(description__contains='PTSAL').exclude(name__contains='.')
+    ifces = Ifce.objects.filter(description__contains=peer.peer_tag).exclude(name__contains='.')
     for ifce in ifces:
         response.append({
             'node': ifce.node.name,
