@@ -26,6 +26,7 @@ def peer_ifces(request, peer_id):
             'ifce': ifce.name,
             'site': ifce.description.split('[')[1].split('-')[0]
         })
+    response = list(set(response))
 
     json_str = json.dumps(response)
     return HttpResponse(
