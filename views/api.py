@@ -89,7 +89,7 @@ def site_devices(request, site_id):
         response.extend([{
             'id': 999999,
             'free_ports': [],
-            'role': 'CPE',
+            'role': 'PE',
             'name': 'lab-mx1.grnet.gr',
             'ifces': [{
                 'description': 'test',
@@ -120,7 +120,7 @@ def site_devices(request, site_id):
         response.extend([{
             'id': 99999999,
             'free_ports': [],
-            'role': 'CPE',
+            'role': 'PE',
             'name': 'lab-mx2.grnet.gr',
             'ifces': [{
                 'description': 'test',
