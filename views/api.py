@@ -21,13 +21,19 @@ def peer_ifces(request, peer_id):
 
     ifces = Ifce.objects.filter(description__contains=peer.peer_tag).exclude(name__contains='.')
     for ifce in ifces:
-        response.append({
-            'node': ifce.node.name,
-            'ifce': ifce.name,
-            'site': ifce.description.split('[')[1].split('-')[0]
-        })
+        # ingore invalid ifces
+        try:
+            ifce.tagged_ifce
+        except:
+            continue
+        else:
+            response.append({
+                'node': ifce.node.name,
+                'ifce': ifce.name,
+                'site': ifce.description.split('[')[1].split('-')[0]
+            })
 
-    json_str = json.dumps(list({v['ifce']:v for v in response}.values()))
+    json_str = json.dumps(list({v['ifce']: v for v in response}.values()))
     return HttpResponse(
         json_str,
         mimetype='application/json',
