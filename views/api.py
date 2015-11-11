@@ -64,7 +64,7 @@ def site_devices(request, site_id):
                 'name': ifce.name.name,
                 'ifces': [ifce.to_node_dict()],
                 # as andreas about that
-                'free_ports': [interface.name for interface in ifce.name.ifce_set.filter(description='', status='free')],
+                'free_ports': [interface.name for interface in ifce.name.ifce_set.filter(taggedifce__isnull=True, status='down').exclude(name__contains='.').exclude(name__contains='ae')],
                 # colocated or not
                 'role': role,
                 'id': ifce.name.pk
