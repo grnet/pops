@@ -69,6 +69,39 @@ def site_devices(request, site_id):
                 'role': role,
                 'id': ifce.name.pk
             })
+    # EXTRA CHECK
+    fallback_ifces = Ifce.objects.filter(
+        description__contains='%s%s' % (site.peer_id.peer_tag, '@%s' % site.site_tag if site.site_tag != 'MAIN' else '')
+    ).exclude(name__contains='.')
+    for ifce in fallback_ifces:
+        found = False
+        for r in response:
+            if r.get('name') == ifce.name:
+                r.get('ifces').append(ifce.to_node_dict())
+                found = True
+        if not found:
+            # this is an access switch
+            role = 'CPE'
+            response.append({
+                'name': ifce.name,
+                'ifces': [ifce.to_node_dict()],
+                'free_ports': [
+                    {
+                        'name': interface.name,
+                        'bandwidth': interface.bandwidth,
+                        'type': interface.ifcetype.get_type()
+                    } for interface in ifce.node.ifce_set.filter(
+                        taggedifce__isnull=True,
+                        status='down',
+                        ifcetype__isnull=False
+                    ).exclude(
+                        name__contains='.'
+                    ).exclude(name__contains='ae')
+                ],
+                # colocated or not
+                'role': role,
+                'id': ifce.pk
+            })
     # testing ifces
     if site_id == '904':
         response.extend([{
