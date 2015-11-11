@@ -83,7 +83,7 @@ def site_devices(request, site_id):
             # this is an access switch
             role = 'CPE'
             response.append({
-                'name': ifce.name,
+                'name': ifce.node.name,
                 'ifces': [ifce.to_node_dict()],
                 'free_ports': [
                     {
