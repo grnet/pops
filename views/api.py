@@ -87,7 +87,7 @@ def site_devices(request, site_id):
     for ifce in fallback_ifces:
         found = False
         for r in response:
-            if r.get('name') == ifce.name:
+            if r.get('name') == ifce.node.name:
                 r.get('ifces').append(ifce.to_node_dict())
                 found = True
         if not found:
@@ -112,7 +112,7 @@ def site_devices(request, site_id):
                 ],
                 # colocated or not
                 'role': role,
-                'id': ifce.pk
+                'id': ifce.node.pk
             })
     # testing ifces
     if site_id == '904':
