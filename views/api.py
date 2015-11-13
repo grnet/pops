@@ -63,8 +63,19 @@ def site_devices(request, site_id):
             response.append({
                 'name': ifce.name.name,
                 'ifces': [ifce.to_node_dict()],
+                'type': 'switch' if ifce.name.is_switch else 'router',
                 # as andreas about that
-                'free_ports': [{'name': interface.name, 'bandwidth': interface.bandwidth, 'type': interface.ifcetype.get_type()} for interface in ifce.name.ifce_set.filter(taggedifce__isnull=True, status='down').exclude(name__contains='.').exclude(name__contains='ae')],
+                'free_ports': [{
+                    'name': interface.name,
+                    'bandwidth': interface.bandwidth,
+                    'type': interface.ifcetype.get_type(),
+                    'id': interface.pk
+                } for interface in ifce.name.ifce_set.filter(
+                    taggedifce__isnull=True, status='down'
+                ).exclude(name__contains='.').exclude(
+                    name__contains='ae'
+                ).exclude(ifcetype__isnull=True)
+                ],
                 # colocated or not
                 'role': role,
                 'id': ifce.name.pk
@@ -85,6 +96,7 @@ def site_devices(request, site_id):
             response.append({
                 'name': ifce.node.name,
                 'ifces': [ifce.to_node_dict()],
+                'type': 'switch' if ifce.node.is_switch else 'router',
                 'free_ports': [
                     {
                         'name': interface.name,
