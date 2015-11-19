@@ -127,7 +127,7 @@ def site_devices(request, site_id):
             'name': 'lab-ex1.grnet.gr',
             'ifces': [{
                 'description': 'test',
-                'ifce': 'ge-0/0/8',
+                'ifce': 'ge-0/0/5',
                 "bandwidth": 1000000000,
                 "vlans": [
                 ],
@@ -171,7 +171,7 @@ def site_devices(request, site_id):
             'name': 'lab-ex2.grnet.gr',
             'ifces': [{
                 'description': 'test2',
-                'ifce': 'ge-0/0/5',
+                'ifce': 'ge-0/0/3',
                 "bandwidth": 1000000000,
                 "vlans": [
                 ],
