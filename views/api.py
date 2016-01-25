@@ -119,7 +119,7 @@ def site_devices(request, site_id):
         response.extend([{
             'id': 99999,
             'free_ports': [{
-                'name': 'ge-0/0/3',
+                'name': 'ge-0/0/5',
                 'bandwidth': 1000000000,
                 'type': 'copper'
             }],
@@ -127,31 +127,26 @@ def site_devices(request, site_id):
             'name': 'lab-ex1.grnet.gr',
             'ifces': [{
                 'description': 'test',
-                'ifce': 'ge-0/0/5',
+                'ifce': 'ge-0/0/0',
                 "bandwidth": 1000000000,
                 "vlans": [
+                    100
                 ],
-                "type": "Unknown",
+                "type": "copper",
                 "id": 999999
             }]
         }])
         response.extend([{
             'id': 999999,
-            'free_ports': [{
-                'name': 'ge-1/0/3',
-                'bandwidth': 1000000000,
-                'type': 'copper'
-            }],
+            'free_ports': [],
             'role': 'PE',
             'name': 'lab-mx1.grnet.gr',
             'ifces': [{
                 'description': 'test',
-                'ifce': 'ge-1/1/9',
+                'ifce': 'ge-1/0/5',
                 "bandwidth": 1000000000,
                 "vlans": [
-                    100,
-                    777,
-                    911
+                    100
                 ],
                 "type": "Unknown",
                 "id": 9999999
@@ -171,29 +166,27 @@ def site_devices(request, site_id):
             'name': 'lab-ex2.grnet.gr',
             'ifces': [{
                 'description': 'test2',
-                'ifce': 'ge-0/0/3',
+                'ifce': 'ge-0/0/1',
                 "bandwidth": 1000000000,
                 "vlans": [
+                    100
                 ],
-                "type": "Unknown",
+                "type": "copper",
                 "id": 9999909
             }]
         }])
         response.extend([{
             'id': 99999999,
             'free_ports': [{
-                'name': 'ge-1/1/3',
-                'bandwidth': 1000000000,
-                'type': 'copper'
             }],
             'role': 'PE',
             'name': 'lab-mx2.grnet.gr',
             'ifces': [{
                 'description': 'test',
-                'ifce': 'ge-1/0/3',
+                'ifce': 'ge-1/0/8',
                 "bandwidth": 1000000000,
                 "vlans": [
-                    5
+                    100
                 ],
                 "type": "Unknown",
                 "id": 999999999
