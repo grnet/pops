@@ -121,7 +121,8 @@ def site_devices(request, site_id):
             'free_ports': [{
                 'name': 'ge-0/0/5',
                 'bandwidth': 1000000000,
-                'type': 'copper'
+                'type': 'copper',
+		"id": 999999
             }],
             'role': 'CPE',
             'name': 'lab-ex1.grnet.gr',
@@ -155,11 +156,11 @@ def site_devices(request, site_id):
     elif site_id == '902':
         response.extend([{
             'id': 999999,
-            'free_ports': [
-                {
-                    'name': 'ge-0/0/3',
-                    'bandwidth': 1000000000,
-                    'type': 'copper'
+            'free_ports': [{
+		'name': 'ge-0/0/3',
+                'bandwidth': 1000000000,
+                'type': 'copper',
+		'id': 999999
                 }
             ],
             'role': 'CPE',
@@ -177,8 +178,7 @@ def site_devices(request, site_id):
         }])
         response.extend([{
             'id': 99999999,
-            'free_ports': [{
-            }],
+            'free_ports': [],
             'role': 'PE',
             'name': 'lab-mx2.grnet.gr',
             'ifces': [{
@@ -336,5 +336,3 @@ def location(request, location=None):
             mimetype='application/json',
             content_type='application/json; charset=utf-8'
         )
-
-
