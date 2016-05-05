@@ -42,11 +42,15 @@ def peer_ifces(request, peer_id):
 
 
 def site_devices(request, site_id):
-    site = PeerSite.objects.get(pk=site_id)
-    if site.peer_id.peer_tag == 'GRNET':
-        ifces = PeerIfces.objects.filter(grnet_device_location=site.peer_site_location)
-    else:
-        ifces = PeerIfces.objects.filter(peer_site__site_id=site_id).order_by('name')
+    try:
+        site = PeerSite.objects.get(pk=site_id)
+    except:
+        site = None
+    if site:
+        if site.peer_id.peer_tag == 'GRNET':
+            ifces = PeerIfces.objects.filter(grnet_device_location=site.peer_site_location)
+        else:
+            ifces = PeerIfces.objects.filter(peer_site__site_id=site_id).order_by('name')
     response = []
     for ifce in ifces:
         found = False
