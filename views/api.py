@@ -51,6 +51,8 @@ def site_devices(request, site_id):
             ifces = PeerIfces.objects.filter(grnet_device_location=site.peer_site_location)
         else:
             ifces = PeerIfces.objects.filter(peer_site__site_id=site_id).order_by('name')
+    else:
+        ifces = []
     response = []
     for ifce in ifces:
         found = False
