@@ -42,17 +42,20 @@ def peer_ifces(request, peer_id):
 
 
 def site_devices(request, site_id):
+
+    site = None
+    ifces = []
+    fallback_ifces = []
+
     try:
         site = PeerSite.objects.get(pk=site_id)
     except:
-        site = None
+        pass
     if site:
         if site.peer_id.peer_tag == 'GRNET':
             ifces = PeerIfces.objects.filter(grnet_device_location=site.peer_site_location)
         else:
             ifces = PeerIfces.objects.filter(peer_site__site_id=site_id).order_by('name')
-    else:
-        ifces = []
     response = []
     for ifce in ifces:
         found = False
@@ -87,9 +90,12 @@ def site_devices(request, site_id):
                 'id': ifce.name.pk
             })
     # EXTRA CHECK
-    fallback_ifces = Ifce.objects.filter(
-        description__contains='%s%s' % (site.peer_id.peer_tag, '@%s' % site.site_tag if site.site_tag != 'MAIN' else '')
-    ).exclude(name__contains='.')
+    try:
+        fallback_ifces = Ifce.objects.filter(
+            description__contains='%s%s' % (site.peer_id.peer_tag, '@%s' % site.site_tag if site.site_tag != 'MAIN' else '')
+        ).exclude(name__contains='.')
+    except:
+        pass
     for ifce in fallback_ifces:
         found = False
         for r in response:
