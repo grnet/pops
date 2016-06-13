@@ -452,3 +452,16 @@ header .title {
 	position: relative;
 }
 
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: auto;
+	z-index: 100;
+	text-indent: 25%;
+}
+
+.footer img{
+	/*box-shadow: 0 0 10px 1px silver;*/
+	display: inline-block;
+}
