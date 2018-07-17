@@ -70,13 +70,7 @@ def get_all_pops(url, tag=None):
         resp['name'] = parent.name
         resp['locations'] = len(children)
         resp['url'] = reverse('api:pops', args=(parent.name,))
-        has_children = False
         for child in children:
-            nodes = child.node_set.count()
-            peer_sites = child.peersite_set.filter(peer_id__valid=True)
-            if not nodes and not peer_sites:
-                continue
-            has_children = True
             # set the edges of the screen
             if child.geo_lat > maxlat:
                 maxlat = child.geo_lat
@@ -90,8 +84,8 @@ def get_all_pops(url, tag=None):
             coords['minlat'] = minlat
             coords['maxlng'] = maxlng
             coords['minlng'] = minlng
-        if has_children:
-            response.append(resp)
+
+        response.append(resp)
     return json.dumps(
         {'url': url, 'pins': response, 'coords': coords, 'tag': tag}
     )
