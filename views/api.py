@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from network.models import PeerIfces, PeerSite, Location, Ifce, Peer
+from collections import defaultdict
 from utils import (
     get_all_pops,
     get_pops_by_city,
@@ -33,9 +34,12 @@ def peer_ifces(request, peer_id):
                 'site': ifce.description.split('[')[1].split('-')[0]
             })
 
-    json_str = json.dumps(list({v['ifce']: v for v in response}.values()))
+    nodes_grouppedby_ifce = defaultdict(list)
+    for val in response:
+        nodes_grouppedby_ifce[val['ifce']].append(val)
+
     return HttpResponse(
-        json_str,
+        json.dumps(nodes_grouppedby_ifce),
         mimetype='application/json',
         content_type='application/json; charset=utf-8'
     )
